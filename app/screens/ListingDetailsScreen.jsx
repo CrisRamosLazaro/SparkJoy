@@ -21,7 +21,7 @@ export default function ListingDetailsScreen() {
                     <ListItem
                         image={avatar}
                         title="Avatash Vatar"
-                        subtitle="3 listings"
+                        description="3 listings"
                     />
                 </View>
             </View>

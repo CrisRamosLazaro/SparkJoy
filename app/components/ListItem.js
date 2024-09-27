@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import BodyText from './BodyText'
 import colors from '../config/colors'
 
-export default function ListItem({ title, subtitle, image }) {
+export default function ListItem({ title, description, image }) {
     return (
         <View style={styles.container}>
             <Image
@@ -12,7 +12,7 @@ export default function ListItem({ title, subtitle, image }) {
             />
             <View>
                 <BodyText style={styles.title}>{title}</BodyText>
-                <BodyText style={styles.subtitle}>{subtitle}</BodyText>
+                <BodyText style={styles.subtitle}>{description}</BodyText>
             </View>
         </View>
     )
@@ -22,6 +22,7 @@ export default function ListItem({ title, subtitle, image }) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        padding: 15
     },
     image: {
         width: 70,
