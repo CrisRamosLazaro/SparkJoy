@@ -6,6 +6,7 @@ import ListItem from "../components/ListItem"
 import avatar1 from "../assets/person1.jpg"
 import avatar2 from "../assets/person2.jpg"
 import Separator from '../components/Separator'
+import ListItemDelete from '../components/ListItemDelete'
 
 const messages = [
     {
@@ -33,6 +34,10 @@ export default function MessagesScreen() {
                         title={item.title}
                         description={item.description}
                         image={item.image}
+                        onPress={() => console.log("Selected:", item)}
+                        renderRightActions={() => <ListItemDelete
+                            onPress={() => console.log(item)}
+                        />}
                     />}
                 ItemSeparatorComponent={Separator}
             />
@@ -42,4 +47,4 @@ export default function MessagesScreen() {
 
 const styles = StyleSheet.create({
 
-})
+}) 
