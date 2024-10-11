@@ -6,15 +6,18 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 export default function ListItemDelete({ onPress }) {
     return (
-        // <TouchableWithoutFeedback onPress={onPress}>
-        <View style={styles.container}>
-            <MaterialCommunityIcons
-                name="trash-can"
-                size={35}
-                color={colors.white}
-            />
-        </View>
-        // </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback
+            onPress={onPress}
+            style={styles.touchable}
+        >
+            <View style={styles.container}>
+                <MaterialCommunityIcons
+                    name="trash-can"
+                    size={35}
+                    color={colors.white}
+                />
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -22,7 +25,13 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.danger,
         width: 70,
+        alignItems: "center",
         justifyContent: "center",
-        alignItems: "center"
+        flex: 1
+
+    },
+    touchable: {
+        flex: 1
     }
+
 })

@@ -1,4 +1,5 @@
-import { FlatList, StyleSheet, View } from 'react-native'
+import { useState } from 'react'
+import { FlatList, StyleSheet } from 'react-native'
 
 import Screen from '../components/Screen'
 import ListItem from "../components/ListItem"
@@ -8,7 +9,7 @@ import avatar2 from "../assets/person2.jpg"
 import Separator from '../components/Separator'
 import ListItemDelete from '../components/ListItemDelete'
 
-const messages = [
+const initialMessages = [
     {
         id: 1,
         title: "Title 1",
@@ -24,6 +25,13 @@ const messages = [
 ]
 
 export default function MessagesScreen() {
+
+    const [messages, setMessages] = useState(initialMessages)
+
+    const handleDelete = message => {
+        setMessages(messages.filter((msg) => msg.id !== message.id))
+    }
+
     return (
         <Screen>
             <FlatList
@@ -36,7 +44,7 @@ export default function MessagesScreen() {
                         image={item.image}
                         onPress={() => console.log("Selected:", item)}
                         renderRightActions={() => <ListItemDelete
-                            onPress={() => console.log(item)}
+                            onPress={() => handleDelete(item)}
                         />}
                     />}
                 ItemSeparatorComponent={Separator}
