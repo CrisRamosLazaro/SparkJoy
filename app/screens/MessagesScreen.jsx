@@ -27,13 +27,14 @@ const initialMessages = [
 export default function MessagesScreen() {
 
     const [messages, setMessages] = useState(initialMessages)
+    const [isRefreshing, setIsRefreshing] = useState(false)
 
     const handleDelete = message => {
         setMessages(messages.filter((msg) => msg.id !== message.id))
     }
 
     return (
-        <Screen>
+        <Screen style={styles.screen}>
             <FlatList
                 data={messages}
                 keyExtractor={message => message.id.toString()}
@@ -48,6 +49,17 @@ export default function MessagesScreen() {
                         />}
                     />}
                 ItemSeparatorComponent={Separator}
+                refreshing={isRefreshing}
+                onRefresh={() => {
+                    setMessages([
+                        {
+                            id: 2,
+                            title: "Title 2",
+                            description: "Curabitur at molestie enim.",
+                            image: avatar2
+                        },
+                    ])
+                }}
             />
         </Screen>
     )
