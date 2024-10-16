@@ -1,10 +1,9 @@
 import { StyleSheet, View, Image, TouchableHighlight } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-import React from 'react'
 import BodyText from './BodyText'
 import colors from '../config/colors'
 
-export default function ListItem({ title, description, image, onPress, renderRightActions }) {
+export default function ListItem({ title, description, image, IconComponent, onPress, renderRightActions }) {
     return (
         <Swipeable
             renderRightActions={renderRightActions}
@@ -14,13 +13,20 @@ export default function ListItem({ title, description, image, onPress, renderRig
                 onPress={onPress}
             >
                 <View style={styles.container}>
-                    <Image
-                        source={image}
-                        style={styles.image}
-                    />
-                    <View>
+                    {IconComponent}
+                    {image &&
+                        <Image
+                            source={image}
+                            style={styles.image}
+                        />
+                    }
+                    <View style={styles.textBox}>
                         <BodyText style={styles.title}>{title}</BodyText>
-                        <BodyText style={styles.subtitle}>{description}</BodyText>
+                        {description &&
+                            <BodyText style={styles.subtitle}>
+                                {description}
+                            </BodyText>
+                        }
                     </View>
                 </View>
             </TouchableHighlight>
@@ -32,18 +38,22 @@ export default function ListItem({ title, description, image, onPress, renderRig
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        padding: 15
+        padding: 15,
+        backgroundColor: colors.white
     },
     image: {
         width: 70,
         height: 70,
         borderRadius: 35,
-        marginRight: 10
     },
     title: {
         fontWeight: "500",
     },
     subtitle: {
         color: colors.medium
+    },
+    textBox: {
+        marginLeft: 10,
+        justifyContent: "center"
     }
 })

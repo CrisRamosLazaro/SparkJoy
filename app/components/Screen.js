@@ -1,16 +1,11 @@
 import { StyleSheet, SafeAreaView } from 'react-native'
 import Constants from "expo-constants"
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-
-
-export default function Screen({ children }) {
+export default function Screen({ children, style }) {
     return (
-        // <GestureHandlerRootView style={styles.container}>
-        <SafeAreaView style={styles.screen}>
+        <SafeAreaView style={[styles.screen, style]}>
             {children}
         </SafeAreaView>
-        // </GestureHandlerRootView>
     )
 }
 
@@ -19,8 +14,5 @@ const styles = StyleSheet.create({
         paddingTop: Constants.statusBarHeight,
         flex: 1
 
-    },
-    container: {
-        flex: 1,
-    },
+    }
 })

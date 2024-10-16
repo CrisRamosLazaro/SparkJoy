@@ -1,5 +1,4 @@
 import { StyleSheet, View, Image } from 'react-native'
-import React from 'react'
 import colors from '../config/colors'
 import BodyText from './BodyText'
 

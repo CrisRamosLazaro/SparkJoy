@@ -1,7 +1,8 @@
 import { StyleSheet, View, Image, Text } from 'react-native'
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+
 import item from "../assets/sparkjoy-chair-for-sale.jpg"
 import colors from '../config/colors'
-import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 const ViewImageScreen = () => {
 

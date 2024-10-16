@@ -1,15 +1,15 @@
-import React from "react"
 import { StyleSheet } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import WelcomeScreen from './app/screens/WelcomeScreen'
-import MessagesScreen from "./app/screens/MessagesScreen"
+import ListingsScreen from "./app/screens/ListingsScreen"
 
 export default function App() {
 
   return (
     // <WelcomeScreen />
     <GestureHandlerRootView style={styles.container}>
-      <MessagesScreen />
+      <ListingsScreen />
+
     </GestureHandlerRootView>
   )
 }

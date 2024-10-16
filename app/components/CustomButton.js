@@ -1,5 +1,4 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
 import colors from '../config/colors'
 
 export default function CustomButton({ text, bgColor, onPress }) {
