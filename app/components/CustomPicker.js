@@ -10,10 +10,12 @@ import defaultStyles from '../config/styles'
 export default function CustomPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
 
     const [showModal, setShowModal] = useState(false)
+
     return (
         <>
             <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
                 <View style={styles.container}>
+
                     {icon &&
                         <MaterialCommunityIcons
                             name={icon}
@@ -21,7 +23,13 @@ export default function CustomPicker({ icon, items, onSelectItem, placeholder, s
                             size={20}
                             style={styles.icon}
                         />}
-                    <BodyText style={styles.text}>{selectedItem ? selectedItem.label : placeholder}</BodyText>
+
+                    {selectedItem ? (
+                        <BodyText style={styles.text}>{selectedItem.label}</BodyText>
+                    ) : (
+                        <BodyText style={styles.placeholder}>{placeholder}</BodyText>
+                    )}
+
                     <MaterialCommunityIcons
                         name="chevron-down"
                         color={defaultStyles.colors.medium}
@@ -65,8 +73,12 @@ const styles = StyleSheet.create({
     icon: {
         marginRight: 10
     },
+    placeholder: {
+        flex: 1,
+        color: defaultStyles.colors.medium
+    },
     text: {
-        flex: 1
+        flex: 1,
     }
 
 })

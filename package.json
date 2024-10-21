@@ -13,10 +13,12 @@
     "expo": "~51.0.35",
     "expo-constants": "^16.0.2",
     "expo-status-bar": "~1.12.1",
+    "formik": "^2.1.4",
     "react": "18.2.0",
     "react-native": "^0.74.5",
     "react-native-gesture-handler": "~2.16.1",
-    "react-native-reanimated": "~3.10.1"
+    "react-native-reanimated": "~3.10.1",
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
