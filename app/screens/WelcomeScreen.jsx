@@ -4,7 +4,7 @@ import colors from '../config/colors'
 import hero from '../assets/sparkjoy-bg.jpg'
 import logo from '../assets/sparkjoy-logo.png'
 
-import CustomButton from "../components/CustomButton"
+import Button from "../components/Button"
 
 const WelcomeScreen = () => {
 
@@ -22,12 +22,12 @@ const WelcomeScreen = () => {
                 <Text style={styles.text}>Sell what no longer sparks joy</Text>
             </View>
             <View style={styles.buttonsContainer}>
-                <CustomButton
+                <Button
                     text="login"
                     bgColor={colors.primary}
                     onPress={() => console.log("Tapped")}
                 />
-                <CustomButton
+                <Button
                     text="register"
                     bgColor={colors.secondary}
                     onPress={() => console.log("Tapped")} />

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import colors from '../config/colors'
 
-export default function CustomButton({ text, bgColor = colors.secondary, onPress }) {
+export default function Button({ text, bgColor = colors.secondary, onPress }) {
     return (
         <TouchableOpacity
             style={[styles.button, { backgroundColor: bgColor }]}
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 15,
-        // alignSelf: 'stretch',
         height: 70,
         marginVertical: 10
     },

@@ -1,10 +1,10 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import BodyText from './BodyText'
+import TextBox from './TextBox'
 
-export default function PickerItem({ label, onPress }) {
+export default function DropdownItem({ item, onPress }) {
     return (
         <TouchableOpacity onPress={onPress}>
-            <BodyText style={styles.text}>{label}</BodyText>
+            <TextBox style={styles.text}>{item.label}</TextBox>
         </TouchableOpacity>
     )
 }

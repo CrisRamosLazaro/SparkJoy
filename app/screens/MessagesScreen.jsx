@@ -2,12 +2,11 @@ import { useState } from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 
 import Screen from '../components/Screen'
-import ListItem from "../components/ListItem"
+import { ListItem, ListItemDelete, Separator } from '../components/lists/index'
 
 import avatar1 from "../assets/person1.jpg"
 import avatar2 from "../assets/person2.jpg"
-import Separator from '../components/Separator'
-import ListItemDelete from '../components/ListItemDelete'
+
 
 const initialMessages = [
     {
@@ -19,7 +18,7 @@ const initialMessages = [
     {
         id: 2,
         title: "Title 2",
-        description: "Curabitur at molestie enim.",
+        description: "Curabitur at molestie enim. Lorem ipsum estie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at Lorem ipsum. Lorem ipsum. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim. Curabitur at molestie enim.Curabitur at molestie enim.",
         image: avatar2
     },
 ]
@@ -47,6 +46,7 @@ export default function MessagesScreen() {
                         renderRightActions={() => <ListItemDelete
                             onPress={() => handleDelete(item)}
                         />}
+                        showChevron
                     />}
                 ItemSeparatorComponent={Separator}
                 refreshing={isRefreshing}

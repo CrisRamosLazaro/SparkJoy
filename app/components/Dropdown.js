@@ -1,20 +1,29 @@
 import { StyleSheet, TouchableWithoutFeedback, View, Modal, Button, FlatList } from 'react-native'
 import { useState } from "react"
 import { MaterialCommunityIcons } from '@expo/vector-icons'
-import BodyText from './BodyText'
-import PickerItem from './PickerItem'
+import TextBox from './TextBox'
+import DropdownItemSimple from './DropdownItemSimple'
 import Screen from './Screen'
 
 import defaultStyles from '../config/styles'
 
-export default function CustomPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+export default function Dropdown({
+    icon,
+    items,
+    columns = 1,
+    onSelectItem,
+    DropdownItemComponent = DropdownItemSimple,
+    placeholder,
+    selectedItem,
+    width = "100%",
+}) {
 
     const [showModal, setShowModal] = useState(false)
 
     return (
         <>
             <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
-                <View style={styles.container}>
+                <View style={[styles.container, width = { width }]}>
 
                     {icon &&
                         <MaterialCommunityIcons
@@ -25,9 +34,9 @@ export default function CustomPicker({ icon, items, onSelectItem, placeholder, s
                         />}
 
                     {selectedItem ? (
-                        <BodyText style={styles.text}>{selectedItem.label}</BodyText>
+                        <TextBox style={styles.text}>{selectedItem.label}</TextBox>
                     ) : (
-                        <BodyText style={styles.placeholder}>{placeholder}</BodyText>
+                        <TextBox style={styles.placeholder}>{placeholder}</TextBox>
                     )}
 
                     <MaterialCommunityIcons
@@ -47,7 +56,9 @@ export default function CustomPicker({ icon, items, onSelectItem, placeholder, s
                     <FlatList
                         data={items}
                         keyExtractor={item => item.value.toString()}
-                        renderItem={({ item }) => <PickerItem
+                        numColumns={columns}
+                        renderItem={({ item }) => <DropdownItemComponent
+                            item={item}
                             label={item.label}
                             onPress={() => {
                                 setShowModal(false)
@@ -66,7 +77,6 @@ const styles = StyleSheet.create({
         backgroundColor: defaultStyles.colors.light,
         borderRadius: 25,
         flexDirection: "row",
-        width: '100%',
         padding: 15,
         marginVertical: 10
     },
@@ -79,6 +89,6 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-    }
+    },
 
 })

@@ -1,13 +1,9 @@
 import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 
-import {
-    CustomForm as Form,
-    CustomFormField as FormField,
-    CustomFormPicker as Picker,
-    SubmitButton
-} from "../components/forms"
+import { Form, FormField, FormDropdown, SubmitButton } from "../components/forms"
 import Screen from '../components/Screen'
+import DropdownItemCategory from '../components/DropdownItemCategory'
 
 import categories from '../consts/categories'
 
@@ -44,11 +40,15 @@ export default function ListingEditScreen() {
                     keyboardType="numeric"
                     maxLength={8}
                     placeholder="Price"
+                    width="33%"
                 />
-                <Picker
+                <FormDropdown
                     items={categories}
+                    columns={3}
                     name='category'
+                    PickerItemComponent={DropdownItemCategory}
                     placeholder="Category"
+                    width="50%"
                 />
                 <FormField
                     maxLength={255}

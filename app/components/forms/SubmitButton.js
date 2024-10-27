@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native'
 import { useFormikContext } from 'formik'
 
-import CustomButton from '../CustomButton'
+import Button from '../Button'
 
 export default function SubmitButton({ text }) {
 
     const { handleSubmit } = useFormikContext()
 
     return (
-        <CustomButton
+        <Button
             text={text}
             onPress={handleSubmit}
         />

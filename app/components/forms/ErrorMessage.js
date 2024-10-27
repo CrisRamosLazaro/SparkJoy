@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import BodyText from '../BodyText'
+import TextBox from '../TextBox'
 
 export default function ErrorMessage({ error, visible }) {
     if (!visible || !error) return null
 
     return (
-        <BodyText style={styles.error}>{error}</BodyText>
+        <TextBox style={styles.error}>{error}</TextBox>
     )
 }
 

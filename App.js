@@ -6,11 +6,11 @@ import ListingEditScreen from './app/screens/ListingEditScreen'
 export default function App() {
 
   return (
-    // <WelcomeScreen /> 
-    // <GestureHandlerRootView style={styles.container}>
-    <ListingEditScreen />
+    <GestureHandlerRootView style={styles.container}>
+      <WelcomeScreen />
+      {/* <ListingEditScreen /> */}
+    </GestureHandlerRootView>
 
-    // </GestureHandlerRootView>
   )
 }
 

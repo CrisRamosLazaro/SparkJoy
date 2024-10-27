@@ -1,33 +1,44 @@
 import { StyleSheet, View, Image, TouchableHighlight } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-import BodyText from '../BodyText'
-import colors from '../../config/colors'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-export default function ListItem({ title, description, image, IconComponent, onPress, renderRightActions }) {
+import TextBox from '../TextBox'
+import defaultStyles from '../../config/styles'
+
+export default function ListItem({ title, description, image, IconComponent, onPress, renderRightActions, showChevron }) {
     return (
         <Swipeable
             renderRightActions={renderRightActions}
         >
             <TouchableHighlight
-                underlayColor={colors.light}
+                underlayColor={defaultStyles.colors.light}
                 onPress={onPress}
             >
-                <View style={styles.container}>
-                    {IconComponent}
-                    {image &&
-                        <Image
-                            source={image}
-                            style={styles.image}
-                        />
-                    }
-                    <View style={styles.textBox}>
-                        <BodyText style={styles.title}>{title}</BodyText>
-                        {description &&
-                            <BodyText style={styles.subtitle}>
-                                {description}
-                            </BodyText>
+                <View style={styles.stripeContainer}>
+                    <View style={styles.infoContainer}>
+
+                        {IconComponent}
+                        {image &&
+                            <Image
+                                source={image}
+                                style={styles.image}
+                            />
                         }
+                        <View style={styles.textBox}>
+                            <TextBox style={styles.title}>{title}</TextBox>
+                            {description &&
+                                <TextBox style={styles.subtitle} multiline numberOfLines={5}>
+                                    {description}
+                                </TextBox>
+                            }
+                        </View>
                     </View>
+                    {showChevron &&
+                        <MaterialCommunityIcons
+                            name="chevron-right"
+                            color={defaultStyles.colors.medium}
+                            size={20}
+                        />}
                 </View>
             </TouchableHighlight>
         </Swipeable>
@@ -36,10 +47,16 @@ export default function ListItem({ title, description, image, IconComponent, onP
 
 
 const styles = StyleSheet.create({
-    container: {
+    stripeContainer: {
         flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         padding: 15,
-        backgroundColor: colors.white
+        backgroundColor: defaultStyles.colors.white
+    },
+    infoContainer: {
+        flexDirection: "row",
+        flex: 1
     },
     image: {
         width: 70,
@@ -50,10 +67,11 @@ const styles = StyleSheet.create({
         fontWeight: "500",
     },
     subtitle: {
-        color: colors.medium
+        color: defaultStyles.colors.medium,
     },
     textBox: {
         marginLeft: 10,
-        justifyContent: "center"
+        justifyContent: "center",
+        maxWidth: "70%"
     }
 })
