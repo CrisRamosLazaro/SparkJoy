@@ -1,13 +1,16 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
+import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
+import * as Location from 'expo-location'
 
-import { Form, FormField, FormDropdown, SubmitButton } from "../components/forms"
+import { Form, FormField, FormDropdown, FormImagePicker, SubmitButton } from "../components/forms"
 import Screen from '../components/Screen'
 import DropdownItemCategory from '../components/DropdownItemCategory'
 
 import categories from '../consts/categories'
 
 const validationSchema = Yup.object().shape({
+    images: Yup.array().required().min(1).label("Images"),
     title: Yup.string().required().min(1).label('Title'),
     price: Yup.number().required().min(1).max(10000).label('Price'),
     category: Yup.object().required().nullable().label("Category"),
@@ -15,13 +18,31 @@ const validationSchema = Yup.object().shape({
 })
 
 export default function ListingEditScreen() {
-    console.log("eeeh categories", categories)
+
+    const [location, setLocation] = useState(null)
+
+    useEffect(() => {
+        (async () => {
+
+            let { status } = await Location.requestForegroundPermissionsAsync()
+            if (status !== 'granted') {
+                return
+            }
+
+            let location = await Location.getCurrentPositionAsync({})
+            setLocation(location)
+        })()
+    }, [])
+
+    let text = 'Waiting..'
+    if (location) text = JSON.stringify(location)
 
     return (
         <Screen style={styles.container}>
 
             <Form
                 initialValues={{
+                    images: [],
                     title: '',
                     price: '',
                     category: null,
@@ -30,6 +51,10 @@ export default function ListingEditScreen() {
                 onSubmit={values => { console.log(values) }}
                 validationSchema={validationSchema}
             >
+                <FormImagePicker
+                    name='images'
+                />
+                <Text>{text}</Text>
                 <FormField
                     name='title'
                     maxLength={255}
