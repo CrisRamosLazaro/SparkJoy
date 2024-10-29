@@ -1,7 +1,6 @@
 import { StyleSheet, Text } from 'react-native'
-import { useState, useEffect } from 'react'
 import * as Yup from 'yup'
-import * as Location from 'expo-location'
+import useLocation from '../hooks/useLocation'
 
 import { Form, FormField, FormDropdown, FormImagePicker, SubmitButton } from "../components/forms"
 import Screen from '../components/Screen'
@@ -10,7 +9,7 @@ import DropdownItemCategory from '../components/DropdownItemCategory'
 import categories from '../consts/categories'
 
 const validationSchema = Yup.object().shape({
-    images: Yup.array().required().min(1).label("Images"),
+    images: Yup.array().min(1, "Please select at least one image"),
     title: Yup.string().required().min(1).label('Title'),
     price: Yup.number().required().min(1).max(10000).label('Price'),
     category: Yup.object().required().nullable().label("Category"),
@@ -19,20 +18,7 @@ const validationSchema = Yup.object().shape({
 
 export default function ListingEditScreen() {
 
-    const [location, setLocation] = useState(null)
-
-    useEffect(() => {
-        (async () => {
-
-            let { status } = await Location.requestForegroundPermissionsAsync()
-            if (status !== 'granted') {
-                return
-            }
-
-            let location = await Location.getCurrentPositionAsync({})
-            setLocation(location)
-        })()
-    }, [])
+    const location = useLocation()
 
     let text = 'Waiting..'
     if (location) text = JSON.stringify(location)
@@ -71,7 +57,7 @@ export default function ListingEditScreen() {
                     items={categories}
                     columns={3}
                     name='category'
-                    PickerItemComponent={DropdownItemCategory}
+                    DropdownItemComponent={DropdownItemCategory}
                     placeholder="Category"
                     width="50%"
                 />

@@ -5,7 +5,7 @@ import Dropdown from '../Dropdown'
 import ErrorMessage from './ErrorMessage'
 
 
-export default function CustomFormPicker({ items, columns, name, DropdownItemComponent, placeholder, width }) {
+export default function FormDropdown({ items, columns, name, DropdownItemComponent, placeholder, width }) {
 
     const { setFieldValue, errors, touched, values } = useFormikContext()
 

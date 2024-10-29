@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import TextBox from './TextBox'
 import IconBox from './IconBox'
 
-export default function CategoryDropdownItem({ item, onPress }) {
+export default function DropdownItemCategory({ item, onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>

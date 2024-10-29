@@ -63,6 +63,7 @@ export default function Dropdown({
                             onPress={() => {
                                 setShowModal(false)
                                 onSelectItem(item)
+                                console.log("ITEM", item)
                             }}
                         />}
                     />

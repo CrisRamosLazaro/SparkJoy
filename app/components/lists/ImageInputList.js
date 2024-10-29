@@ -8,13 +8,13 @@ export default function ImageInputList({ imageUris = [], onAddImage, onRemoveIma
     const scrollView = useRef()
 
     return (
-        <View>
+        <View style={styles.container}>
             <ScrollView
                 ref={scrollView}
                 horizontal
                 onContentSizeChange={() => scrollView.current.scrollToEnd()}
             >
-                <View style={styles.container}>
+                <View style={styles.row}>
                     {imageUris.map(uri => (
                         <View key={uri} style={styles.cell}>
                             <ImageInput
@@ -34,6 +34,9 @@ export default function ImageInputList({ imageUris = [], onAddImage, onRemoveIma
 
 const styles = StyleSheet.create({
     container: {
+        height: 100,
+    },
+    row: {
         flexDirection: 'row',
     },
     cell: {

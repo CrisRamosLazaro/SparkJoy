@@ -1,12 +1,13 @@
 import { ImageBackground, View, Image, Text, StyleSheet } from 'react-native'
 
+import Button from '../components/Button'
+
 import colors from '../config/colors'
 import hero from '../assets/sparkjoy-bg.jpg'
 import logo from '../assets/sparkjoy-logo.png'
 
-import Button from "../components/Button"
 
-const WelcomeScreen = () => {
+export default WelcomeScreen = ({ navigation }) => {
 
     return (
         <ImageBackground
@@ -23,40 +24,39 @@ const WelcomeScreen = () => {
             </View>
             <View style={styles.buttonsContainer}>
                 <Button
-                    text="login"
+                    text='login'
                     bgColor={colors.primary}
-                    onPress={() => console.log("Tapped")}
+                    onPress={() => navigation.navigate('Login')}
                 />
                 <Button
-                    text="register"
+                    text='register'
                     bgColor={colors.secondary}
-                    onPress={() => console.log("Tapped")} />
+                    onPress={() => navigation.navigate('Signup')} />
             </View>
         </ImageBackground>
     )
 
 }
 
-export default WelcomeScreen
 
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        justifyContent: "flex-end",
+        justifyContent: 'flex-end',
     },
     logo: {
         width: 100,
         height: 100,
     },
     logoContainer: {
-        width: "100%",
-        position: "absolute",
+        width: '100%',
+        position: 'absolute',
         top: 70,
-        alignItems: "center"
+        alignItems: 'center'
     },
     buttonsContainer: {
         padding: 20,
-        width: "100%"
+        width: '100%'
     },
     text: {
         color: colors.dark,

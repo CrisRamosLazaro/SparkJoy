@@ -1,22 +1,20 @@
-import { useState } from 'react'
 import { useFormikContext } from 'formik'
 
 import ImageInputList from '../lists/ImageInputList'
 import ErrorMessage from './ErrorMessage'
 
 
-export default function FormImagePicker({ imageUris, onAddImage, onRemoveImage, name }) {
+export default function FormImagePicker({ name }) {
 
-    const { errors, touched } = useFormikContext()
-
-    const [displayedImages, setDisplayedImages] = useState([])
+    const { errors, setFieldValue, touched, values } = useFormikContext()
+    const displayedImages = values[name]
 
     const handleAdd = uri => {
-        setDisplayedImages([...displayedImages, uri])
+        setFieldValue(name, [...displayedImages, uri])
     }
 
     const handleRemove = uri => {
-        setDisplayedImages(displayedImages.filter(imgUri => imgUri !== uri))
+        setFieldValue(name, displayedImages.filter(imgUri => imgUri !== uri))
     }
 
     return (

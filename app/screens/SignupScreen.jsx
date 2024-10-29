@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 
-import { CustomForm, CustomFormField, SubmitButton } from "../components/forms"
+import { Form, FormField, SubmitButton } from "../components/forms"
 import Screen from '../components/Screen'
 
 
@@ -11,17 +11,17 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(4).label("Password")
 })
 
-export default function SignupScreen() {
+export default SignupScreen = () => {
 
     return (
         <Screen style={styles.container}>
 
-            <CustomForm
+            <Form
                 initialValues={{ name: '', email: '', password: '' }}
                 onSubmit={values => { console.log(values) }}
                 validationSchema={validationSchema}
             >
-                <CustomFormField
+                <FormField
                     name='name'
                     autoCapitalize="none"
                     autoCorrect="false"
@@ -30,7 +30,7 @@ export default function SignupScreen() {
                     placeholder="Name"
                     textContentType="emailAddress"
                 />
-                <CustomFormField
+                <FormField
                     name='email'
                     autoCapitalize="none"
                     autoCorrect="false"
@@ -39,7 +39,7 @@ export default function SignupScreen() {
                     placeholder="Email"
                     textContentType="emailAddress"
                 />
-                <CustomFormField
+                <FormField
                     name='password'
                     autoCapitalize="none"
                     autoCorrect="false"
@@ -50,7 +50,7 @@ export default function SignupScreen() {
                 />
 
                 <SubmitButton text="register" />
-            </CustomForm>
+            </Form>
         </Screen>
     )
 }
