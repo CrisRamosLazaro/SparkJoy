@@ -1,4 +1,5 @@
 import { StyleSheet, View, Image, TouchableHighlight } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -7,41 +8,43 @@ import defaultStyles from '../../config/styles'
 
 export default function ListItem({ title, description, image, IconComponent, onPress, renderRightActions, showChevron }) {
     return (
-        <Swipeable
-            renderRightActions={renderRightActions}
-        >
-            <TouchableHighlight
-                underlayColor={defaultStyles.colors.light}
-                onPress={onPress}
+        <GestureHandlerRootView>
+            <Swipeable
+                renderRightActions={renderRightActions}
             >
-                <View style={styles.stripeContainer}>
-                    <View style={styles.infoContainer}>
+                <TouchableHighlight
+                    underlayColor={defaultStyles.colors.light}
+                    onPress={onPress}
+                >
+                    <View style={styles.stripeContainer}>
+                        <View style={styles.infoContainer}>
 
-                        {IconComponent}
-                        {image &&
-                            <Image
-                                source={image}
-                                style={styles.image}
-                            />
-                        }
-                        <View style={styles.textBox}>
-                            <TextBox style={styles.title}>{title}</TextBox>
-                            {description &&
-                                <TextBox style={styles.subtitle} multiline numberOfLines={5}>
-                                    {description}
-                                </TextBox>
+                            {IconComponent}
+                            {image &&
+                                <Image
+                                    source={image}
+                                    style={styles.image}
+                                />
                             }
+                            <View style={styles.textBox}>
+                                <TextBox style={styles.title}>{title}</TextBox>
+                                {description &&
+                                    <TextBox style={styles.subtitle} multiline numberOfLines={5}>
+                                        {description}
+                                    </TextBox>
+                                }
+                            </View>
                         </View>
+                        {showChevron &&
+                            <MaterialCommunityIcons
+                                name="chevron-right"
+                                color={defaultStyles.colors.medium}
+                                size={20}
+                            />}
                     </View>
-                    {showChevron &&
-                        <MaterialCommunityIcons
-                            name="chevron-right"
-                            color={defaultStyles.colors.medium}
-                            size={20}
-                        />}
-                </View>
-            </TouchableHighlight>
-        </Swipeable>
+                </TouchableHighlight>
+            </Swipeable>
+        </GestureHandlerRootView>
     )
 }
 

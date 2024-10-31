@@ -1,22 +1,24 @@
 import { StyleSheet, View, Image } from 'react-native'
 
-import saleItem from "../assets/sparkjoy-chair-for-sale.jpg"
 import avatar from "../assets/person1.jpg"
 
 import TextBox from '../components/TextBox'
 import ListItem from '../components/lists/ListItem'
 import colors from '../config/colors'
 
-export default function ListingDetailsScreen() {
+export default function ListingDetailsScreen({ route }) {
+
+    const listing = route.params
+
     return (
         <View >
             <Image
-                source={saleItem}
+                source={listing.image}
                 style={styles.image}
             />
             <View style={styles.detailsContainer}>
-                <TextBox style={styles.text}>Grey Chair for sale</TextBox>
-                <TextBox style={styles.price}>$200</TextBox>
+                <TextBox style={styles.text}>{listing.title}</TextBox>
+                <TextBox style={styles.price}>${listing.price}</TextBox>
                 <View style={styles.userContainer}>
                     <ListItem
                         image={avatar}
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
     },
     userContainer: {
         marginVertical: 40,
+        height: 110
     },
     title: {
         fontSize: 24,

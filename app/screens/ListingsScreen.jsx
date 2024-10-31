@@ -1,4 +1,6 @@
 import { StyleSheet, View, FlatList } from 'react-native'
+
+import routes from '../routes/routes'
 import Screen from '../components/Screen'
 import Card from '../components/Card'
 import chair from '../assets/sparkjoy-chair-for-sale.jpg'
@@ -22,7 +24,7 @@ const listings = [
     }
 ]
 
-export default function ListingsScreen() {
+export default function ListingsScreen({ navigation }) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
@@ -34,6 +36,7 @@ export default function ListingsScreen() {
                             title={item.title}
                             subtitle={"$" + item.price}
                             image={item.image}
+                            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
                         />
                     }
                 />

@@ -1,4 +1,5 @@
 import { StyleSheet, View, FlatList } from 'react-native'
+
 import { ListItem, Separator } from '../components/lists/index'
 import IconBox from '../components/IconBox'
 import Screen from '../components/Screen'
@@ -7,30 +8,33 @@ import colors from '../config/colors'
 
 const menuItems = [
     {
-        title: "My Listings",
-        icon: "format-list-bulleted",
+        title: 'My Listings',
+        icon: 'format-list-bulleted',
         bgColor: colors.primary,
-        size: 50
+        size: 50,
+        screen: ''
+
     },
     {
-        title: "My Messages",
-        icon: "email",
+        title: 'My Messages',
+        icon: 'email',
         bgColor: colors.secondary,
-        size: 50
+        size: 50,
+        screen: 'MyMessages'
     }
 ]
 
-export default function MyAccountScreen() {
+export default function MyAccountScreen({ navigation }) {
     return (
         <Screen style={styles.screen}>
-            <View style={styles.container}>
+            <View style={styles.container1}>
                 <ListItem
                     title="Spooky Higgs"
                     description="spooky@higgs.com"
                     image={person1}
                 />
             </View>
-            <View style={styles.container}>
+            <View style={styles.container2}>
                 <FlatList
                     data={menuItems}
                     keyExtractor={menuItem => menuItem.title}
@@ -43,6 +47,7 @@ export default function MyAccountScreen() {
                                 bgColor={item.bgColor}
                                 size={item.size}
                             />}
+                            onPress={() => navigation.navigate(item.screen)}
                         />
                     }
                 />
@@ -62,8 +67,12 @@ export default function MyAccountScreen() {
 
 const styles = StyleSheet.create({
 
-    container: {
-        marginVertical: 20
+    container1: {
+        marginVertical: 20,
+        height: 110
+    },
+    container2: {
+        marginVertical: 20,
     },
     screen: {
         backgroundColor: colors.light,
