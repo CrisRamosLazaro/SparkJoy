@@ -1,4 +1,5 @@
 import { ImageBackground, View, Image, Text, StyleSheet } from 'react-native'
+import routes from '../routes/routes'
 
 import Button from '../components/Button'
 
@@ -26,12 +27,12 @@ export default WelcomeScreen = ({ navigation }) => {
                 <Button
                     text='login'
                     bgColor={colors.primary}
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={() => navigation.navigate(routes.LOGIN)}
                 />
                 <Button
                     text='register'
                     bgColor={colors.secondary}
-                    onPress={() => navigation.navigate('Signup')} />
+                    onPress={() => navigation.navigate(routes.SIGNUP)} />
             </View>
         </ImageBackground>
     )
