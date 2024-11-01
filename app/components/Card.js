@@ -2,11 +2,11 @@ import { StyleSheet, View, Image, TouchableWithoutFeedback } from 'react-native'
 import colors from '../config/colors'
 import TextBox from './TextBox'
 
-export default function Card({ title, subtitle, image, onPress }) {
+export default function Card({ title, subtitle, imageUrl, onPress }) {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.card}>
-                <Image source={image} style={styles.image} />
+                <Image source={{ uri: imageUrl }} style={styles.image} />
                 <View style={styles.textDeetsContainer}>
                     <TextBox style={styles.title}>{title}</TextBox>
                     <TextBox style={styles.subtitle}>{subtitle}</TextBox>
