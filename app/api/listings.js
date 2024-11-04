@@ -1,7 +1,7 @@
 import client from './client'
 
-const endpoint = '/listings'
+const getListings = () => client.get('/listings')
 
-const getListings = () => client.get(endpoint)
+const saveListing = (listingData) => client.post('/saveListing', listingData)
 
-export default { getListings }
+export default { getListings, saveListing }

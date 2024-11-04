@@ -2,9 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import routes from './routes'
 
+import AccountNavigator from './AccountNavigator'
 import ListingsNavigator from './ListingsNavigator'
 import ListingEditScreen from '../screens/ListingEditScreen'
-import AccountNavigator from './AccountNavigator'
 import NewListingButton from '../components/NewListingButton'
 
 const Tab = createBottomTabNavigator()
