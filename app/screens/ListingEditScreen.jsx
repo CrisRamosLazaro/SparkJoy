@@ -1,7 +1,6 @@
 import { StyleSheet, Text } from 'react-native'
 import * as Yup from 'yup'
 
-import useApi from '../hooks/useApi'
 import useLocation from '../hooks/useLocation'
 import listingsApi from '../api/listings'
 import { Form, FormField, FormDropdown, FormImagePicker, SubmitButton } from "../components/forms"
@@ -21,27 +20,29 @@ export default function ListingEditScreen() {
 
     const location = useLocation()
 
-    const data = new FormData()
-    data.append('title', title)
-    data.append('price', price)
-    data.append('categoryID', category.id)
-    data.append('description', description)
+    const handleSubmit = async values => {
 
-    images.forEach((img, i) => data.append('images', {
-        name: 'image' + i,
-        type: 'image/jpeg',
-        uri: img
-    }))
-    if (location) data.append('location', JSON.stringify(location))
+        const { title, price, category, description, images } = values
 
+        const data = new FormData()
 
-    const handleNewUserSubmit = e => {
-        e.preventDefault()
+        data.append('title', title)
+        data.append('price', price)
+        data.append('categoryId', category.id)
+        data.append('description', description)
+
+        images.forEach((img, i) => data.append('images', {
+            name: 'image' + i,
+            type: 'image/jpeg',
+            uri: img
+        }))
+        if (location) data.append('location', JSON.stringify(location))
+
+        const result = await listingsApi.saveListing(data)
+        if (!result.ok) return alert('Error saving your listing')
+        alert('Success')
 
     }
-
-    const { data: newListing, error, loading, request: sendNewListing } = useApi(listingsApi.saveListing)
-
 
     return (
         <Screen style={styles.container}>
@@ -54,13 +55,12 @@ export default function ListingEditScreen() {
                     category: null,
                     description: ''
                 }}
-                onSubmit={values => { console.log(values) }}
+                onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
                 <FormImagePicker
                     name='images'
                 />
-                <Text>{text}</Text>
                 <FormField
                     name='title'
                     maxLength={255}

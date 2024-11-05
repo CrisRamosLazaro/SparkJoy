@@ -23,7 +23,7 @@ export default function ImageInput({ imageUri, onChangeImage }) {
             const result = await ImagePicker.launchImageLibraryAsync({ quality: 0.5 })
             if (!result.canceled) onChangeImage(result.assets[0].uri)
         } catch (error) {
-            console.log('Error reading an image', error)
+            console.error('Error reading an image', error)
         }
     }
 

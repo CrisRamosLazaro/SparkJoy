@@ -55,7 +55,7 @@ export default function Dropdown({
                     <Button title="close" onPress={() => setShowModal(false)} />
                     <FlatList
                         data={items}
-                        keyExtractor={item => item.value.toString()}
+                        keyExtractor={item => item.id.toString()}
                         numColumns={columns}
                         renderItem={({ item }) => <DropdownItemComponent
                             item={item}
@@ -63,7 +63,6 @@ export default function Dropdown({
                             onPress={() => {
                                 setShowModal(false)
                                 onSelectItem(item)
-                                console.log("ITEM", item)
                             }}
                         />}
                     />
