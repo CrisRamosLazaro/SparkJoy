@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { useState } from 'react'
 import * as Yup from 'yup'
 
 import listingsApi from '../api/listings'
@@ -7,6 +8,7 @@ import { Form, FormField, FormDropdown, FormImagePicker, SubmitButton } from "..
 import DropdownItemCategory from '../components/DropdownItemCategory'
 import Screen from '../components/Screen'
 import categories from '../consts/categories'
+import UploadScreen from './UploadScreen'
 
 const validationSchema = Yup.object().shape({
     images: Yup.array().min(1, "Please select at least one image"),
@@ -19,8 +21,13 @@ const validationSchema = Yup.object().shape({
 export default function ListingEditScreen() {
 
     const location = useLocation()
+    const [uploadProgress, setUploadProgress] = useState(0)
+    const [isModalVisible, setIsModalVisible] = useState(false)
 
     const handleSubmit = async values => {
+
+        setIsModalVisible(true)
+
         const { title, price, category, description, images } = values
         const data = new FormData()
 
@@ -41,8 +48,10 @@ export default function ListingEditScreen() {
         const formDataWithoutImg = { title, price, categoryId: category.id, description, location }
 
         try {
-            const response = await listingsApi.createListing(data, formDataWithoutImg) // yes, pass both data formDataWithoutImg objects
+            const response = await listingsApi.createListing(data, formDataWithoutImg, setUploadProgress)
             console.log('Response:', response)
+            setIsModalVisible(false)
+
             alert('Success')
         } catch (error) {
             console.error('Error creating listing:', error)
@@ -53,7 +62,7 @@ export default function ListingEditScreen() {
 
     return (
         <Screen style={styles.container}>
-
+            <UploadScreen progress={uploadProgress} visible={isModalVisible} />
             <Form
                 initialValues={{
                     images: [],
