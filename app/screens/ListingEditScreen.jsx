@@ -1,11 +1,11 @@
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 
-import useLocation from '../hooks/useLocation'
 import listingsApi from '../api/listings'
+import useLocation from '../hooks/useLocation'
 import { Form, FormField, FormDropdown, FormImagePicker, SubmitButton } from "../components/forms"
-import Screen from '../components/Screen'
 import DropdownItemCategory from '../components/DropdownItemCategory'
+import Screen from '../components/Screen'
 import categories from '../consts/categories'
 
 const validationSchema = Yup.object().shape({
@@ -21,9 +21,7 @@ export default function ListingEditScreen() {
     const location = useLocation()
 
     const handleSubmit = async values => {
-
         const { title, price, category, description, images } = values
-
         const data = new FormData()
 
         data.append('title', title)
@@ -32,17 +30,26 @@ export default function ListingEditScreen() {
         data.append('description', description)
 
         images.forEach((img, i) => data.append('images', {
-            name: 'image' + i,
+            name: `image${i}`,
             type: 'image/jpeg',
-            uri: img
+            uri: img,
         }))
+
         if (location) data.append('location', JSON.stringify(location))
 
-        const result = await listingsApi.saveListing(data)
-        if (!result.ok) return alert('Error saving your listing')
-        alert('Success')
+        // Prepare the form data for chunked upload
+        const formDataWithoutImg = { title, price, categoryId: category.id, description, location }
 
+        try {
+            const response = await listingsApi.createListing(data, formDataWithoutImg) // yes, pass both data formDataWithoutImg objects
+            console.log('Response:', response)
+            alert('Success')
+        } catch (error) {
+            console.error('Error creating listing:', error)
+            alert('Error saving your listing')
+        }
     }
+
 
     return (
         <Screen style={styles.container}>
