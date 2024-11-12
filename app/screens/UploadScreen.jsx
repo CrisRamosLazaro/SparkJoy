@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, View } from 'react-native'
+import { Modal, StyleSheet, View, Text } from 'react-native'
 import * as Progress from 'react-native-progress'
 import LottieView from 'lottie-react-native'
 import colors from '../config/colors'
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     animation: {
-        width: 150
-    }
+        width: 150,
+        height: 150
+    },
 })

@@ -63,7 +63,7 @@ export default function ListingEditScreen() {
         <Screen style={styles.container}>
             <UploadScreen progress={uploadProgress} visible={isModalVisible} onDone={() => {
                 setIsModalVisible(false)
-                // setUploadProgress(0)
+                setUploadProgress(0)
             }} />
             <Form
                 initialValues={{
