@@ -50,9 +50,8 @@ export default function ListingEditScreen() {
         try {
             const response = await listingsApi.createListing(data, formDataWithoutImg, setUploadProgress)
             console.log('Response:', response)
-            setIsModalVisible(false)
 
-            alert('Success')
+            // alert('Success')
         } catch (error) {
             console.error('Error creating listing:', error)
             alert('Error saving your listing')
@@ -62,7 +61,10 @@ export default function ListingEditScreen() {
 
     return (
         <Screen style={styles.container}>
-            <UploadScreen progress={uploadProgress} visible={isModalVisible} />
+            <UploadScreen progress={uploadProgress} visible={isModalVisible} onDone={() => {
+                setIsModalVisible(false)
+                // setUploadProgress(0)
+            }} />
             <Form
                 initialValues={{
                     images: [],
